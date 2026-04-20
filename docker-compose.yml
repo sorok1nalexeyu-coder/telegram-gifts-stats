@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  gift-stats:
+    build: .
+    container_name: telegram-gifts-stats
+    restart: unless-stopped  # Автоперезапуск при краше или reboot сервера
+    env_file:
+      - .env                 # Подтягивает TON_API_KEY из файла
+    volumes:
+      - .//app/data     # Сохранение БД, CSV и графиков на хосте
+    working_dir: /app
+    # Раскомментируйте строку ниже, чтобы видеть логи в реальном времени
+    # stdin_open: true
+    # tty: true
+
