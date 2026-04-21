@@ -4,13 +4,13 @@ services:
   gift-stats:
     build: .
     container_name: telegram-gifts-stats
-    restart: unless-stopped  # Автоперезапуск при краше или reboot сервера
+    restart: unless-stopped
     env_file:
-      - .env                 # Подтягивает TON_API_KEY из файла
+      - .env
     volumes:
-      - .//app/data     # Сохранение БД, CSV и графиков на хосте
-    working_dir: /app
-    # Раскомментируйте строку ниже, чтобы видеть логи в реальном времени
-    # stdin_open: true
-    # tty: true
-
+      - ./data:/app/data
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
