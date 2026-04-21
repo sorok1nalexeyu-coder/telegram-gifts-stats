@@ -142,7 +142,7 @@ def sync_gift_history(gift_addr, ton_usd):
     while True:
         data = safe_request(f"{BASE_URL}/nfts/{gift_addr}/history", 
                             headers=HEADERS_TON, params={"limit": 100, "offset": offset})
-        if not data or "actions" not in data: break
+        if not data or "actions" not in  break
         actions = data["actions"]
         events.extend(actions)
         if len(actions) < 100: break
@@ -191,7 +191,7 @@ def main():
         while True:
             data = safe_request(f"{BASE_URL}/collections/{col['address']}/items", 
                                 headers=HEADERS_TON, params={"limit": 100, "offset": offset})
-            if not data or "nft_items" not in data: break
+            if not data or "nft_items" not in  break
             for it in data["nft_items"]:
                 all_gifts.append(it["address"]["address"])
             if len(data["nft_items"]) < 100: break
@@ -244,4 +244,3 @@ if __name__ == "__main__":
     except Exception as e:
         logger.critical(f"💥 Критическая ошибка: {e}", exc_info=True)
         sys.exit(1)
-
